@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 import sys
 
+from endless_pagination import settings
+
 from endless_pagination import exceptions
 from endless_pagination.settings import (
     DEFAULT_CALLABLE_AROUNDS,
@@ -170,7 +172,10 @@ def get_querystring_for_page(
     if 'querystring_key' in querydict:
         del querydict['querystring_key']
     if querydict:
-        return '?' + querydict.urlencode()
+        if settings.DASHED_PAGES:
+            return '-' + str(page_number)
+        else:
+            return '?' + querydict.urlencode()
     return ''
 
 

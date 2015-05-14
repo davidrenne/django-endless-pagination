@@ -41,6 +41,23 @@ ADD_NOFOLLOW = getattr(settings, 'ENDLESS_PAGINATION_ADD_NOFOLLOW', False)
 PAGE_LIST_CALLABLE = getattr(
     settings, 'ENDLESS_PAGINATION_PAGE_LIST_CALLABLE', None)
 
+#
+# Hack to work around page=XX get var
+#    Use this fork to setup dashed urls by setting up a new endpoint like below
+#    Just stub a sample index page view that will handle calling your main function and changing the page get var!
+# 
+#url(r'-(?P<page>\d+)/$', views.index_page, name='website_next'),
+#
+#views.py
+#
+#def index_page(*args, **kwargs):
+#    args[0].GET = args[0].GET.copy()
+#    args[0].GET['page'] = kwargs['page']
+#    return index(*args, **kwargs)
+
+DASHED_PAGES = getattr(
+    settings, 'ENDLESS_PAGINATION_DASHED_PAGES', False)
+
 # The default callable returns a sequence of pages producing Digg-style
 # pagination, and depending on the settings below.
 DEFAULT_CALLABLE_EXTREMES = getattr(
