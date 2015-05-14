@@ -50,7 +50,7 @@ class EndlessPage(utils.UnicodeMixin):
             request, number, self.querystring_key,
             default_number=default_number)
         path = iri_to_uri(override_path or request.path)
-        if True:
+        if settings.DASHED_PAGES:
             path = path.replace('-' + str(current_number), self.url) \
                 .replace('-' + str(current_number) + '/', self.url + '/')
             self.path = '{0}'.format(path)
